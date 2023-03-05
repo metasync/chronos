@@ -1,0 +1,11 @@
+ARG RUBY_IMAGE_TAG=3.2.1-alpine3.17
+FROM docker.io/ruby:${RUBY_IMAGE_TAG}
+
+ENV APP_HOME=/home/app
+ENV HISTFILE=${APP_HOME}/.bash_history
+ENV BUNDLE_PATH=${APP_HOME}/.bundle
+
+RUN apk -U upgrade \
+   && apk add build-base gcompat freetds-dev mariadb-dev curl git
+
+WORKDIR ${APP_HOME}

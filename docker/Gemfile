@@ -1,0 +1,11 @@
+source "https://rubygems.org"
+
+git_source(:metasync) do |repo_name|
+  "https://github.com/metasync/#{repo_name}.git"
+end
+
+gem "citrine", metasync: "citrine", tag: "0.1.1"
+gem "chronos", metasync: "chronos", tag: "0.1.0"
+
+gem "mysql2", "~> 0.5"
+gem "tiny_tds", "~> 2.1"

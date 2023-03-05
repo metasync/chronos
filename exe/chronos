@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+# frozen-string-literal: true
+
+require "bundler/setup"
+require "citrine"
+lib = File.expand_path("../../lib", __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require "chronos"
+
+Citrine.run_cli(Chronos) do |opts|
+  opts[:init_config_files] = [File.expand_path("../../config/interactors.yml", __FILE__)]
+  opts[:exclude_operations] = []
+  opts[:system_migration_dir] = File.expand_path(File.join(File.dirname(__FILE__),
+    "..", "db", "migrations", "chronos"))
+  opts[:system_migration_table] = "chronos_schema_info"
+end

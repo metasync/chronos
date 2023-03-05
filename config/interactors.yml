@@ -1,0 +1,22 @@
+---
+interactors:
+  # general:
+  #   pool_size: 4
+  archive_interactor:
+    operations:
+      resolve_pending:
+      archive_new:
+      load_trace_log:
+      save_trace_log:
+  purge_interactor:
+    operations:
+      archival_purge:
+      direct_purge:
+      load_trace_log:
+      save_trace_log:
+  monitor_interactor:
+    operations:
+      inspect_latencies:
+  simulate_interactor:
+    operations:
+      populate_data:
