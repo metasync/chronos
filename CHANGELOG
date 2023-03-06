@@ -7,7 +7,8 @@
   * Used gem Sequel for datbase integration
     * MySQL and MS SQL Server are tested
 
-## [0.1.1] - 2023-03-07
+## [0.1.2] - 2023-03-07
 
   * Revised docker files to build dev / release images
-  
+  * Added Gemfile.lcok for docker build
+  * Added image push in Makefile
