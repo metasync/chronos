@@ -72,15 +72,15 @@ module Chronos
         options[:from_schema], options[:from_target] = options[:from].split(".")
         options[:to_schema], options[:to_target] = options[:to].split(".")
         options[:to_target] ||= options[:from_target]
-        options[:target_id] = 
+        options[:target_id] =
           options[:primary_key_uuid] ? :target_uuid : :target_id
-        options[:chronos_archive_transactions] = 
-          options[:primary_key_uuid] ? 
-            :chronos_uuid_archive_transactions : 
+        options[:chronos_archive_transactions] =
+          options[:primary_key_uuid] ?
+            :chronos_uuid_archive_transactions :
             :chronos_archive_transactions
-        options[:chronos_archive_transaction_logs] = 
-          options[:primary_key_uuid] ? 
-            :chronos_uuid_archive_transaction_logs : 
+        options[:chronos_archive_transaction_logs] =
+          options[:primary_key_uuid] ?
+            :chronos_uuid_archive_transaction_logs :
             :chronos_archive_transaction_logs
       end
 
