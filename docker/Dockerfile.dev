@@ -6,6 +6,7 @@ ENV HISTFILE=${APP_HOME}/.bash_history
 ENV BUNDLE_PATH=${APP_HOME}/.bundle
 
 RUN apk -U upgrade \
-   && apk add build-base gcompat freetds-dev mariadb-dev curl git
+    && apk add curl git build-base gcompat \
+       freetds-dev mariadb-dev 
 
 WORKDIR ${APP_HOME}

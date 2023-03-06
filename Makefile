@@ -17,6 +17,10 @@ dev:
 		-v ${CITRINE_SRC_PATH}:${CITRINE_GEM_PATH} \
 		${RUBY_IMAGE} /bin/sh
 
+run:
+	@${CONTAINER_CLI} run --rm -it \
+		${CHRONOS_IMAGE} /bin/sh
+
 prune:
 	@${CONTAINER_CLI} image prune -f
 
