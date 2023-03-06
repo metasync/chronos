@@ -6,3 +6,8 @@
   * Supported archive and purge
   * Used gem Sequel for datbase integration
     * MySQL and MS SQL Server are tested
+
+## [0.1.1] - 2023-03-07
+
+  * Revised docker files to build dev / release images
+  
