@@ -11,6 +11,9 @@ build.dev:
 		-t $(RUBY_IMAGE) \
 		--build-arg RUBY_IMAGE_TAG=${RUBY_IMAGE_TAG}
 
+push:
+	@${CONTAINER_CLI} push $(CHRONOS_IMAGE)
+
 dev:
 	@${CONTAINER_CLI} run --rm -it \
 		-v $(SRC_PATH):$(WORKDIR) \
