@@ -6,6 +6,5 @@
 /pkg/
 /spec/reports/
 /tmp/
-Gemfile.lock
 .DS_Store
 .bash_history
