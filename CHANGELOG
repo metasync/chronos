@@ -18,3 +18,7 @@
   * Corrected chronos version
   * Updated citrine version
   * Revised gitignore
+
+## [0.1.4] - 2023-03-07
+
+  * Properly set chronos_archive_transaction table name for purger
