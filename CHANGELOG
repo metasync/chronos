@@ -12,3 +12,9 @@
   * Revised docker files to build dev / release images
   * Added Gemfile.lcok for docker build
   * Added image push in Makefile
+
+## [0.1.3] - 2023-03-07
+
+  * Corrected chronos version
+  * Updated citrine version
+  * Revised gitignore
