@@ -16,7 +16,7 @@ RUN apk add build-base curl git \
 
 WORKDIR ${CHRONOS_HOME}
 
-COPY Gemfile Gemfile.lock ./
+COPY Gemfile ./
 
 RUN bundle config set without "development test" \
     && bundle install --jobs=3 --retry=3 \
