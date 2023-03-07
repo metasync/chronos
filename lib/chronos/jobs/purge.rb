@@ -55,6 +55,14 @@ module Chronos
       def init_target
         options[:from_schema], options[:from_target] = options[:from].split(".")
         options[:target_id] = options[:primary_key_uuid] ? :target_uuid : :target_id
+        options[:chronos_archive_transactions] =
+          options[:primary_key_uuid] ?
+            :chronos_uuid_archive_transactions :
+            :chronos_archive_transactions
+        options[:chronos_archive_transaction_logs] =
+          options[:primary_key_uuid] ?
+            :chronos_uuid_archive_transaction_logs :
+            :chronos_archive_transaction_logs
       end
 
       def init_dependents
