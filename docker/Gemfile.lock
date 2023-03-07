@@ -9,10 +9,10 @@ GIT
 
 GIT
   remote: https://github.com/metasync/citrine.git
-  revision: 783e0ee9d93cdaf3444724d912cb790edc3b4a58
-  tag: 0.1.2
+  revision: c7adff3ec87a3678e78222fa945342ef1af963c6
+  tag: 0.1.3
   specs:
-    citrine (0.1.2)
+    citrine (0.1.3)
       celluloid (~> 0.17.4)
       http (~> 5.1.1)
       rack (>= 2.0.5)
