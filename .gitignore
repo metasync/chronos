@@ -8,3 +8,4 @@
 /tmp/
 .DS_Store
 .bash_history
+Gemfile.lock
