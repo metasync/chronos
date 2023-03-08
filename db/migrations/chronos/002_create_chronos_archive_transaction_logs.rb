@@ -10,9 +10,9 @@ Sequel.migration do
       DateTime :opened_at, null: false
       DateTime :closed_at, null: false
 
-      index [:target_uuid, :archive_job_id], unique: true, name: "chronos_atxs_tuuid_ajid"
-      index [:archive_job_id, :traced_at]
-      index [:archive_job_id, :closed_at]
+      index [:target_uuid, :archive_job_id], unique: true, name: "chronos_uatxs_tuuid_ajid"
+      index [:archive_job_id, :traced_at], name: "chronos_uatxs_ajid_ta"
+      index [:archive_job_id, :closed_at], name: "chronos_uatxs_ajid_ca"
       index [:closed_at]
     end
 
@@ -25,8 +25,8 @@ Sequel.migration do
       DateTime :closed_at, null: false
 
       index [:target_id, :archive_job_id], unique: true, name: "chronos_atxs_tid_ajid"
-      index [:archive_job_id, :traced_at]
-      index [:archive_job_id, :closed_at]
+      index [:archive_job_id, :traced_at], name: "chronos_atxs_ajid_ta"
+      index [:archive_job_id, :closed_at], name: "chronos_atxs_ajid_ca"
       index [:closed_at]
     end
   end
