@@ -2,7 +2,7 @@
 
 Sequel.migration do
   up do
-    create_table :chronos_trace_logs do
+    create_table Chronos::Migration.chronos_trace_logs do
       String :id, primary_key: true
       String :job_id, null: false
       String :target, null: false
@@ -18,6 +18,6 @@ Sequel.migration do
   end
 
   down do
-    drop_table :chronos_trace_logs
+    drop_table Chronos::Migration.chronos_trace_logs
   end
 end

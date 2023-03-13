@@ -30,10 +30,15 @@ module Chronos
       def set_default_values
         super
         init_abnormal_latency
+        init_chronos_trace_logs
       end
 
       def init_abnormal_latency
         options[:abnormal_latency] = parse_time_interval(options[:abnormal_latency])
+      end
+
+      def init_chronos_trace_logs
+        options[:chronos_trace_logs] = Chronos::Migration.chronos_trace_logs
       end
 
       def validate

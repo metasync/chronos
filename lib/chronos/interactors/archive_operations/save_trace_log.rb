@@ -17,7 +17,7 @@ module Chronos
 
         def save_trace_log(context)
           trace_repository(context).run_sql(method(:create_trace_log),
-            trace_log: context[:trace_log])
+            job: job(context), trace_log: context[:trace_log])
         end
 
         def target
@@ -26,8 +26,8 @@ module Chronos
 
         protected
 
-        def create_trace_log(db, trace_log:)
-          db.from(:chronos_trace_logs).insert(trace_log)
+        def create_trace_log(db, job:, trace_log:)
+          db.from(job[:chronos_trace_logs]).insert(trace_log)
         end
 
         def trace_log(job)

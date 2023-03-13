@@ -12,5 +12,6 @@ Citrine.run_cli(Chronos) do |opts|
   opts[:exclude_operations] = []
   opts[:system_migration_dir] = File.expand_path(File.join(File.dirname(__FILE__),
     "..", "db", "migrations", "chronos"))
+  opts[:system_schema] = ENV["CHRONOS_SCHEMA"]
   opts[:system_migration_table] = "chronos_schema_info"
 end

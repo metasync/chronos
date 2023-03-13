@@ -24,7 +24,7 @@ module Chronos
         protected
 
         def latest_trace_log(db, job:)
-          db.from(:chronos_trace_logs)
+          db.from(job[:chronos_trace_logs])
             .select(:traced_at, :synced_at)
             .where(job_id: job[:id])
             .reverse_order(:id).first

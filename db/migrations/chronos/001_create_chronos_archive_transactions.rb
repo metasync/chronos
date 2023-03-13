@@ -2,7 +2,7 @@
 
 Sequel.migration do
   up do
-    create_table :chronos_uuid_archive_transactions do
+    create_table Chronos::Migration.chronos_archive_transactions(primary_key_uuid: true) do
       String :id, primary_key: true
       String :archive_job_id, null: false
       String :target_uuid
@@ -15,7 +15,7 @@ Sequel.migration do
       index [:archive_job_id, :closed_at], name: "chronos_uatxs_ajid_ca"
     end
 
-    create_table :chronos_archive_transactions do
+    create_table Chronos::Migration.chronos_archive_transactions(primary_key_uuid: false) do
       String :id, primary_key: true
       String :archive_job_id, null: false
       Bignum :target_id
@@ -30,7 +30,7 @@ Sequel.migration do
   end
 
   down do
-    drop_table :chronos_uuid_archive_transactions
-    drop_table :chronos_archive_transactions
+    drop_table Chronos::Migraiton.chronos_archive_transactions(primary_key_uuid: true)
+    drop_table Chronos::Migraiton.chronos_archive_transactions(primary_key_uuid: false)
   end
 end

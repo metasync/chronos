@@ -27,7 +27,7 @@ module Chronos
         end
 
         def trace_logs(db, job:)
-          db.from(:chronos_trace_logs)
+          db.from(job[:chronos_trace_logs])
             .select(:job_id, :target, Sequel.function(:max, :synced_at).as(:last_synced_at))
             .where(type: job[:trace_type])
             .group(:job_id, :target)

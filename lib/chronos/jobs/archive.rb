@@ -75,13 +75,10 @@ module Chronos
         options[:target_id] =
           options[:primary_key_uuid] ? :target_uuid : :target_id
         options[:chronos_archive_transactions] =
-          options[:primary_key_uuid] ?
-            :chronos_uuid_archive_transactions :
-            :chronos_archive_transactions
+          Chronos::Migration.chronos_archive_transactions(primary_key_uuid: options[:primary_key_uuid])
         options[:chronos_archive_transaction_logs] =
-          options[:primary_key_uuid] ?
-            :chronos_uuid_archive_transaction_logs :
-            :chronos_archive_transaction_logs
+          Chronos::Migration.chronos_archive_transaction_logs(primary_key_uuid: options[:primary_key_uuid])
+        options[:chronos_trace_logs] = Chronos::Migration.chronos_trace_logs
       end
 
       def init_filter_attrs
