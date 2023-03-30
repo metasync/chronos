@@ -20,6 +20,16 @@
   * Updated citrine version
   * Revised gitignore
 
-## [0.1.4] - 2023-03-08
+## [0.1.5] - 2023-03-08
 
   * Deprecated Dockerfiles and Gemfile to build Chronos image
+  * Shorten index name for archive transaction tables
+
+## [0.1.6] - 2023-03-13
+
+  * Supported optional custom database schema for Chronos related system tables
+    * Database schema support depends on the actual databases are used
+  
+## [0.1.7] - 2023-03-30
+
+  * Solved query performance issue in retrieving pending archivable datasets
