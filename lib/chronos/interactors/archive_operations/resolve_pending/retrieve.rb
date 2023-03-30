@@ -15,7 +15,7 @@ module Chronos
 
         def pending_archivable_dataset(db, job:)
           pending_archivable_base(db, job)
-            .order(Sequel[job[:from_target].to_sym][job[:primary_key]])
+            # .order(Sequel[job[:from_target].to_sym][job[:primary_key]])
             .limit(job[:limit], job[:offset])
             .as_hash(job[:primary_key])
         end
