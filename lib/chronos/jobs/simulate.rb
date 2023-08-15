@@ -31,7 +31,7 @@ module Chronos
       end
 
       def init_target
-        options[:from_schema], options[:from_target] = options[:from].split(".")
+        options[:from_schema], options[:from_target] = options[:from].split(".", 2)
       end
 
       def validate

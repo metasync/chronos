@@ -69,8 +69,8 @@ module Chronos
       end
 
       def init_target
-        options[:from_schema], options[:from_target] = options[:from].split(".")
-        options[:to_schema], options[:to_target] = options[:to].split(".")
+        options[:from_schema], options[:from_target] = options[:from].split(".", 2)
+        options[:to_schema], options[:to_target] = options[:to].split(".", 2)
         options[:to_target] ||= options[:from_target]
         options[:target_id] =
           options[:primary_key_uuid] ? :target_uuid : :target_id

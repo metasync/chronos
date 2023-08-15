@@ -53,7 +53,7 @@ module Chronos
       end
 
       def init_target
-        options[:from_schema], options[:from_target] = options[:from].split(".")
+        options[:from_schema], options[:from_target] = options[:from].split(".", 2)
         options[:target_id] = options[:primary_key_uuid] ? :target_uuid : :target_id
         options[:chronos_archive_transactions] =
           Chronos::Migration.chronos_archive_transactions(primary_key_uuid: options[:primary_key_uuid])
