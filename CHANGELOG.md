@@ -1,5 +1,9 @@
 # Change log
 
+## [0.1.9] - 2023-08-15
+
+  * Supported fully qualified table name - database.schema.table
+
 ## [0.1.8] - 2023-04-12
 
   * Enforced offset limit without order by when retrieving pending archive transactions
