@@ -1,8 +1,9 @@
 # Change log
 
-## [0.1.11] - 2023-08-16
+## [0.1.12] - 2023-08-16
 
   * Supported fully qualified table name - database.schema.table
+  * Fixed a bug in purge to use the given primary key instead of default primary key (#id)
 
 ## [0.1.8] - 2023-04-12
 
