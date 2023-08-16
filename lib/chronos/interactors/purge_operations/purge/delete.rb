@@ -12,7 +12,7 @@ module Chronos
 
         def batch_purgation(db, job:, dataset:)
           purgeable_target(db, job)
-            .where(id: dataset)
+            .where(job[:primary_key] => dataset)
             .delete
         end
 

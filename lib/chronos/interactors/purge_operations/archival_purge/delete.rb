@@ -17,7 +17,7 @@ module Chronos
           db.transaction do
             batch_purgation(db, job: job, dataset: dataset)
             db.from(job[:chronos_archive_transactions])
-              .where(id: trans)
+              .where(job[:primary_key] => trans)
               .delete
           end
         end
