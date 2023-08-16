@@ -4,7 +4,7 @@ module Chronos
   module Jobs
     class Purge < Traceable
       def self.signature_keys
-        @signature_keys ||= super.concat([:from_schema, :from_target])
+        @signature_keys ||= super.concat([:from_repo, :from_target])
       end
 
       attr_reader :dataset
@@ -52,15 +52,7 @@ module Chronos
         init_next_operation
       end
 
-      def init_target
-        options[:from_schema], options[:from_target] = options[:from].split(".", 2)
-        options[:target_id] = options[:primary_key_uuid] ? :target_uuid : :target_id
-        options[:chronos_archive_transactions] =
-          Chronos::Migration.chronos_archive_transactions(primary_key_uuid: options[:primary_key_uuid])
-        options[:chronos_archive_transaction_logs] =
-          Chronos::Migration.chronos_archive_transaction_logs(primary_key_uuid: options[:primary_key_uuid])
-        options[:chronos_trace_logs] = Chronos::Migration.chronos_trace_logs
-      end
+      def init_target_to; end # No target for purge job
 
       def init_dependents
         options[:dependents] ||= {}
@@ -74,7 +66,8 @@ module Chronos
       end
 
       def default_foreign_key
-        options[:from_target].classify.foreign_key
+        # options[:from_target].classify.foreign_key
+        options[:from].split('.').last.classify.foreign_key
       end
 
       def init_archive_jobs
@@ -128,19 +121,7 @@ module Chronos
         end
       end
 
-      def validate
-        super
-        validate_target
-      end
-
-      def validate_target
-        if options[:from_schema].nil?
-          raise ArgumentError, "Schema for purgation MUST be specified - from: schema.target"
-        end
-        if options[:from_target].nil?
-          raise ArgumentError, "Target for purgation MUST be specified - from: schema.target"
-        end
-      end
+      def validate_target_to; end # No target for purge job
 
       def reset_states
         super

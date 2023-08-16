@@ -27,14 +27,14 @@ module Chronos
         end
 
         def retrieve_schema(context)
-          context[:schema] = origin(context).schema(job(context)[:from_target])
+          context[:schema] = origin(context).schema(job(context)[:qualified_from_target])
           context[:primary_key] = get_primary_key(context[:schema])
           !context[:schema].empty?
         end
 
         def retrieve_foreign_key_samples(context)
           context[:foreign_keys] =
-            origin(context).foreign_keys(job(context)[:from_target]).tap do |foreign_keys|
+            origin(context).foreign_keys(job(context)[:qualified_from_target]).tap do |foreign_keys|
               foreign_keys.each_value do |foreign_key|
                 context[:foreign_key_samples][foreign_key.name] =
                   origin(context).run_sql(method(:foreign_key_data),
@@ -126,7 +126,7 @@ module Chronos
         end
 
         def new_data(db, job:, dataset:)
-          db.from(job[:from_target]).multi_insert(dataset)
+          db.from(job[:qualified_from_target]).multi_insert(dataset)
         end
 
         def update_context(context)

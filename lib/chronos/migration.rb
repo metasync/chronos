@@ -23,5 +23,13 @@ module Chronos
     def self.qualified_table_name(table_name, schema: ENV["CHRONOS_SCHEMA"])
       schema.nil? ? table_name : Sequel.qualify(schema, table_name)
     end
+
+    def self.qualified_identifier(identifier)
+      qualifiers = identifier.split('.')
+      identifier = qualifiers.pop
+      qualifiers.empty? ? 
+        Sequel[identifier.to_sym] : 
+        Sequel[qualifiers.pop.to_sym][identifier.to_sym]
+    end
   end
 end

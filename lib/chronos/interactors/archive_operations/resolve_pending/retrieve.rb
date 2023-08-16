@@ -15,14 +15,15 @@ module Chronos
 
         def pending_archivable_dataset(db, job:)
           pending_archivable_base(db, job)
-            # .order(Sequel[job[:from_target].to_sym][job[:primary_key]])
+            # .order(job[:qualified_from_target][job[:primary_key]])
             .order(Sequel.lit("(SELECT NULL)"))
             .limit(job[:limit], job[:offset])
             .as_hash(job[:primary_key])
         end
 
         def pending_archivable_base(db, job)
-          target = Sequel[job[:from_target].to_sym]
+          # target = Sequel[job[:from_target].to_sym]
+          target = job[:qualified_from_target]
           catxs = Sequel[job[:chronos_archive_transactions]]
           archivable_base(db, job)
             .select(target.*)

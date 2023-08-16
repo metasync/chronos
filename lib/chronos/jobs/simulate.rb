@@ -6,7 +6,7 @@ module Chronos
       include Citrine::Runner::Job::Batchable
 
       def self.signature_keys
-        @signature_keys ||= super.concat([:from_schema, :from_target])
+        @signature_keys ||= super.concat([:from_repo, :from_target])
       end
 
       attr_reader :dataset
@@ -31,7 +31,8 @@ module Chronos
       end
 
       def init_target
-        options[:from_schema], options[:from_target] = options[:from].split(".", 2)
+        options[:from_repo], options[:from_target] = options[:from].split(".", 2)
+        options[:qualified_from_target] = Chronos::Migration.qualified_sequeal_identifier(options[:from_target])
       end
 
       def validate
@@ -40,11 +41,11 @@ module Chronos
       end
 
       def validate_target
-        if options[:from_schema].nil?
-          raise ArgumentError, "Schema to simulate MUST be specified - from: schema.target"
+        if options[:from_repo].nil?
+          raise ArgumentError, "Repository to simulate MUST be specified - from: repo.schema.target / repo.target"
         end
         if options[:from_target].nil?
-          raise ArgumentError, "Target to simulate MUST be specified - from: schema.target"
+          raise ArgumentError, "Target to simulate MUST be specified - from: repo.schema.target / repo.target"
         end
       end
 

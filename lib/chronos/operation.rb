@@ -26,11 +26,11 @@ module Chronos
     end
 
     def origin(context)
-      actor("#{job(context)[:from_schema]}_repository")
+      actor("#{job(context)[:from_repo]}_repository")
     end
 
     def replica(context)
-      actor("#{job(context)[:to_schema]}_repository")
+      actor("#{job(context)[:to_repo]}_repository")
     end
 
     def fail_operation_by_task(context)

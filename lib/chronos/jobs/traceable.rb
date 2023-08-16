@@ -34,6 +34,34 @@ module Chronos
         )
       end
 
+      def on_init
+        super
+        init_source_and_target
+      end
+
+      def init_source_and_target
+        init_source_from
+        init_target_to
+        options[:target_id] =
+          options[:primary_key_uuid] ? :target_uuid : :target_id
+        options[:chronos_archive_transactions] =
+          Chronos::Migration.chronos_archive_transactions(primary_key_uuid: options[:primary_key_uuid])
+        options[:chronos_archive_transaction_logs] =
+          Chronos::Migration.chronos_archive_transaction_logs(primary_key_uuid: options[:primary_key_uuid])
+        options[:chronos_trace_logs] = Chronos::Migration.chronos_trace_logs
+      end
+
+      def init_source_from
+        options[:from_repo], options[:from_target] = options[:from].split(".", 2)
+        options[:qualified_from_target] = Chronos::Migration.qualified_sequeal_identifier(options[:from_target])
+      end
+
+      def init_target_to
+        options[:to_repo], options[:to_target] = options[:to].split(".", 2)
+        options[:to_target] ||= options[:from_target]
+        options[:qualified_to_target] = Chronos::Migration.qualified_identifier(options[:to_target])
+      end
+
       def set_default_values
         super
         init_trace
@@ -49,6 +77,30 @@ module Chronos
         if options[:trace_drift]
           options[:trace_drift] =
             parse_time_interval(options[:trace_drift])
+        end
+      end
+
+      def validate
+        super
+        validate_source_from
+        validate_target_to
+      end
+
+      def validate_source_from
+        if options[:from_repo].nil?
+          raise ArgumentError, "Source repository MUST be specified - from: repo.schema.target / from: repo.target"
+        end
+        if options[:from_target].nil?
+          raise ArgumentError, "Source target MUST be specified - from: repo.schema.target / from: repo.target"
+        end
+      end
+
+      def validate_target_to
+        if options[:to_repo].nil?
+          raise ArgumentError, "Destination repository MUST be specified - to: repo.schema.target / to: repo.target"
+        end
+        if options[:to_target].nil?
+          raise ArgumentError, "Destination target MUST be specified - to: repo.schema.target / to: repo.target"
         end
       end
 

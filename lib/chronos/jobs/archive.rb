@@ -5,7 +5,7 @@ module Chronos
     class Archive < Traceable
       def self.signature_keys
         @signature_keys ||=
-          super.concat([:from_schema, :from_target, :to_schema, :to_target])
+          super.concat([:from_repo, :from_target, :to_repo, :to_target])
       end
 
       attr_reader :dataset
@@ -62,23 +62,9 @@ module Chronos
 
       def on_init
         super
-        init_target
         init_filter_attrs
         init_archive_filter
         init_transform_processor
-      end
-
-      def init_target
-        options[:from_schema], options[:from_target] = options[:from].split(".", 2)
-        options[:to_schema], options[:to_target] = options[:to].split(".", 2)
-        options[:to_target] ||= options[:from_target]
-        options[:target_id] =
-          options[:primary_key_uuid] ? :target_uuid : :target_id
-        options[:chronos_archive_transactions] =
-          Chronos::Migration.chronos_archive_transactions(primary_key_uuid: options[:primary_key_uuid])
-        options[:chronos_archive_transaction_logs] =
-          Chronos::Migration.chronos_archive_transaction_logs(primary_key_uuid: options[:primary_key_uuid])
-        options[:chronos_trace_logs] = Chronos::Migration.chronos_trace_logs
       end
 
       def init_filter_attrs
@@ -104,26 +90,6 @@ module Chronos
           options[:transform] = eval <<-RUBY, binding, __FILE__, __LINE__ + 1
             ->(row, job) { #{options[:transform]}; row }
           RUBY
-        end
-      end
-
-      def validate
-        super
-        validate_target
-      end
-
-      def validate_target
-        if options[:from_schema].nil?
-          raise ArgumentError, "Schema to archive from MUST be specified - from: schema.target"
-        end
-        if options[:from_target].nil?
-          raise ArgumentError, "Target to archive from MUST be specified - from: schema.target"
-        end
-        if options[:to_schema].nil?
-          raise ArgumentError, "Schema to archive to MUST be specified - to: schema.target"
-        end
-        if options[:to_target].nil?
-          raise ArgumentError, "Target to archive to MUST be specified - to: schema.target"
         end
       end
 

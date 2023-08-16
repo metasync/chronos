@@ -33,7 +33,7 @@ module Chronos
         end
 
         def purgeable_target(db, job)
-          db.from(job[:from_target])
+          db.from(job[:qualified_from_target])
         end
 
         def find_dependent_purgeables(context, **dependent)

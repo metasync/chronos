@@ -72,7 +72,7 @@ module Chronos
 
         def new_archivables(db, job:, dataset:, trans_logs:)
           db.transaction do
-            db.from(job[:to_target]).multi_insert(dataset)
+            db.from(job[:qualified_to_target]).multi_insert(dataset)
             db.from(job[:chronos_archive_transaction_logs]).multi_insert(trans_logs)
           end
         end

@@ -21,7 +21,7 @@ module Chronos
         end
 
         def archivable_target(db, job)
-          db.from(job[:from_target])
+          db.from(job[:qualified_from_target])
         end
       end
     end
