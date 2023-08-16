@@ -43,7 +43,6 @@ module Chronos
 
       def on_init
         super
-        init_target
         init_dependents
         init_archive_jobs
         init_purgation_strategy

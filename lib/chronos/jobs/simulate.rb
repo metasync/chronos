@@ -32,7 +32,7 @@ module Chronos
 
       def init_target
         options[:from_repo], options[:from_target] = options[:from].split(".", 2)
-        options[:qualified_from_target] = Chronos::Migration.qualified_sequeal_identifier(options[:from_target])
+        options[:qualified_from_target] = Chronos::Migration.qualified_identifier(options[:from_target])
       end
 
       def validate
