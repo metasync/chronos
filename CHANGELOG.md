@@ -1,6 +1,6 @@
 # Change log
 
-## [0.1.9] - 2023-08-15
+## [0.1.10] - 2023-08-16
 
   * Supported fully qualified table name - database.schema.table
 
